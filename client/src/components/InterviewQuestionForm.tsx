@@ -1,3 +1,4 @@
+import { useQuestionsContext } from "@/context/questionsContext";
 import { questionRequestFormSchema } from "@/schema";
 import { type QuestionRequestForm } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,24 +10,31 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Textarea } from "./ui/textarea";
 
 const InterviewQuestionForm = () => {
+  const { fetchQuestions, isLoading } = useQuestionsContext();
+
   const form = useForm<QuestionRequestForm>({
     resolver: zodResolver(questionRequestFormSchema),
     defaultValues: {
-      experienceLevel: null,
+      experienceLevel: undefined,
       jobDescription: "",
     },
   });
 
   function onSubmit(data: QuestionRequestForm) {
     console.log(data);
+    fetchQuestions(data);
+  }
+
+  function handleReset() {
+    form.reset();
   }
 
   return (
     <div className="h-full rounded-2xl border border-slate-100 p-4 shadow-lg">
       {/* Title */}
       <div className="mb-6 flex items-center">
-        <div className="from-primary/20 to-secondary/20 mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br">
-          <BrainCircuit className="text-primary h-5 w-5" />
+        <div className="gradient-background mr-3 flex h-10 w-10 items-center justify-center rounded-full">
+          <BrainCircuit className="gradient-foreground h-5 w-5" />
         </div>
         <h3 className="text-xl font-medium text-gray-800">Create Questions</h3>
       </div>
@@ -39,10 +47,10 @@ const InterviewQuestionForm = () => {
             name="experienceLevel"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">
+                <FormLabel className="text-base font-medium text-gray-700">
                   Experience Level
                 </FormLabel>
-                <Select onValueChange={field.onChange}>
+                <Select onValueChange={field.onChange} value={field.value ?? ""}>
                   <FormControl>
                     <SelectTrigger className="focus:ring-primary/50 w-full cursor-pointer rounded-lg border-slate-200 shadow-sm">
                       <SelectValue placeholder="Select experience level" />
@@ -64,12 +72,13 @@ const InterviewQuestionForm = () => {
             name="jobDescription"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">Job Description</FormLabel>
+                <FormLabel className="text-base font-medium text-gray-700">
+                  Job Description
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Paste job description here..."
-                    className="focus:ring-primary/50 min-h-[200px] resize-none rounded-lg border-slate-200 shadow-sm"
-                    rows={6}
+                    className="focus:ring-primary/50 h-[200px] overflow-y-auto rounded-lg border-slate-200 shadow-sm"
                     {...field}
                   />
                 </FormControl>
@@ -81,8 +90,8 @@ const InterviewQuestionForm = () => {
           <div>
             <Button
               type="submit"
-              className="from-primary to-secondary w-full rounded-lg bg-gradient-to-r py-6 text-white shadow-md transition-all hover:opacity-90"
-              //   disabled={generateQuestionsMutation.isPending}
+              className="gradient-background gradient-foreground w-full rounded-lg py-6 text-white shadow-md transition-all hover:opacity-90"
+              disabled={isLoading}
             >
               <Sparkles className="mr-2 h-4 w-4" /> Generate Questions
             </Button>
@@ -93,7 +102,7 @@ const InterviewQuestionForm = () => {
               type="button"
               variant="outline"
               className="w-full rounded-lg border-slate-200 bg-white py-6 text-gray-700 hover:bg-slate-50"
-              // onClick={handleReset}
+              onClick={handleReset}
             >
               Reset Form
             </Button>

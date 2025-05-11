@@ -1,5 +1,6 @@
 import { QuestionsProvider } from "@/context/questionsContext";
 import InterviewQuestionForm from "./InterviewQuestionForm";
+import QuestionList from "./QuestionList";
 
 const Generator = () => {
   return (
@@ -8,7 +9,9 @@ const Generator = () => {
         <div className="w-full md:w-[35%]">
           <InterviewQuestionForm />
         </div>
-        <div className="w-full bg-gray-200 md:w-[65%]">Right Content</div>
+        <div className="w-full md:w-[65%]">
+          <QuestionList />
+        </div>
       </div>
     </QuestionsProvider>
   );

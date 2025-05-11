@@ -1,5 +1,6 @@
-import type { Question, QuestionsContextType } from "@/types";
-import { createContext, useContext, useState } from "react";
+import { useFetchQuestions } from "@/hooks/useFetchQuestions";
+import type { QuestionsContextType } from "@/types";
+import { createContext, useContext } from "react";
 
 const QuestionsContext = createContext<QuestionsContextType | null>(null);
 
@@ -15,15 +16,6 @@ export const useQuestionsContext = () => {
 };
 
 export const QuestionsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [questions, setQuestions] = useState<Question[]>([]);
-
-  const handleQuestionsGenerated = (data: Question[]) => {
-    setQuestions(data);
-  };
-
-  return (
-    <QuestionsContext.Provider value={{ questions, handleQuestionsGenerated }}>
-      {children}
-    </QuestionsContext.Provider>
-  );
+  const state = useFetchQuestions();
+  return <QuestionsContext.Provider value={state}>{children}</QuestionsContext.Provider>;
 };

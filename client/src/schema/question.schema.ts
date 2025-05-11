@@ -30,6 +30,8 @@ export const InterviewQuestionsResponseSchema = z.object({
 });
 
 export const questionRequestFormSchema = z.object({
-  experienceLevel: z.enum(["junior", "mid-level", "senior"]).nullable(),
+  experienceLevel: z.enum(["junior", "mid-level", "senior"], {
+    required_error: "Experience level is required",
+  }),
   jobDescription: z.string().min(1, "Job description is required"),
 });
