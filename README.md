@@ -151,6 +151,30 @@ Body: {
 }
 ```
 
+Technical Implementation
+
+```typescript
+// Parsers
+const parser = StructuredOutputParser.fromZodSchema(
+  InterviewQuestionsResponseSchema
+);
+const outputFixingParser = OutputFixingParser.fromLLM(model, parser);
+
+// Core generation chain
+const interviewQuestionsChain =
+  INTERVIEW_QUESTIONS_PROMPT.pipe(model).pipe(outputFixingParser);
+
+// Generation function
+const generateInterviewQuestions = async (params: GenerateQuestions) => {
+  const { jobDescription, experienceLevel } = params;
+  return await interviewQuestionsChain.invoke({
+    jobDescription,
+    experienceLevel,
+    numberOfQuestions: 5,
+  });
+};
+```
+
 Response:
 
 ```typescript
