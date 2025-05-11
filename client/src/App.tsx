@@ -1,8 +1,17 @@
+import Generator from "./components/Generator";
+
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold text-red-500 underline">Hello World</h1>
-    </>
+    <main className="mx-auto flex max-w-screen-xl flex-col items-center gap-16 px-4 pt-32 pb-12 sm:px-10">
+      <section className="flex flex-col items-center gap-2 text-center">
+        <h1>Interview Questions Generator</h1>
+        <h2>Generate tailored interview questions based on experience level and job description</h2>
+      </section>
+
+      <section className="w-full">
+        <Generator />
+      </section>
+    </main>
   );
 }
 
