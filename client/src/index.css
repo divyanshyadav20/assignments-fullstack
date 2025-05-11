@@ -18,7 +18,7 @@ h1 {
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
-  @apply text-5xl;
+  @apply text-4xl sm:text-5xl;
 }
 
 h2 {
@@ -26,11 +26,11 @@ h2 {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  @apply text-xl;
+  @apply text-base sm:text-xl;
 }
 
 .gradient-background {
-  @apply bg-gradient-to-br from-pink-400 to-slate-50;
+  @apply bg-gradient-to-br from-pink-200 to-slate-50;
 }
 
 .gradient-foreground {

@@ -30,7 +30,7 @@ const InterviewQuestionForm = () => {
   }
 
   return (
-    <div className="h-full rounded-2xl border border-slate-100 p-4 shadow-lg">
+    <div className="h-full rounded-2xl border border-slate-100 bg-white p-4 shadow-lg">
       {/* Title */}
       <div className="mb-6 flex items-center">
         <div className="gradient-background mr-3 flex h-10 w-10 items-center justify-center rounded-full">
@@ -111,8 +111,8 @@ const InterviewQuestionForm = () => {
       </Form>
 
       <div className="mt-8 border-t border-slate-200 pt-6">
-        <h4 className="mb-3 text-sm font-semibold text-gray-700">How it works</h4>
-        <ul className="space-y-3 text-sm text-gray-600">
+        <h4 className="mb-3 text-base font-semibold text-gray-700">How it works</h4>
+        <ul className="space-y-3 text-base text-gray-600">
           <li className="flex items-start">
             <CheckCircle2 className="mt-0.5 mr-2 h-5 w-5 flex-shrink-0" />
             <span>Select your experience level (junior, mid-level, senior)</span>
