@@ -11,7 +11,7 @@ router.post("/generate", async (req: Request, res: Response) => {
     // Validate request body
     const validatedData = GenerateQuestionsSchema.parse(req.body);
 
-    // Generate questions using LangChain
+    // Generate questions using LangChain OpenAI
     const { questions, metadata } = await generateInterviewQuestions(validatedData);
 
     res.status(200).json({
@@ -23,7 +23,7 @@ router.post("/generate", async (req: Request, res: Response) => {
     if (error instanceof z.ZodError) {
       res.status(400).json({
         success: false,
-        error: "Invalid request data",
+        error: "Invalid Payload",
         details: error.errors,
       });
     }

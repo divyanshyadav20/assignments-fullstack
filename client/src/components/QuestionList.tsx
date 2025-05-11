@@ -1,11 +1,11 @@
 import { useQuestionsContext } from "@/context/questionsContext";
 import { motion } from "framer-motion";
-import { LoaderPinwheel, Sparkles } from "lucide-react";
+import { CircleSlash, LoaderPinwheel, Sparkles } from "lucide-react";
 import { QuestionAccordion } from "./QuestionAccordion";
 import { Accordion } from "./ui/accordion";
 
 const QuestionList = () => {
-  const { isLoading, metadata, questions } = useQuestionsContext();
+  const { isLoading, metadata, questions, isError } = useQuestionsContext();
   const { experienceLevel } = metadata ?? {};
 
   return (
@@ -40,13 +40,13 @@ const QuestionList = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-2 text-sm text-slate-500"
           >
-            This may take a few seconds
+            This may take around a minute
           </motion.p>
         </motion.div>
       )}
 
       {/* Empty State */}
-      {!isLoading && questions.length === 0 && (
+      {!isLoading && questions.length === 0 && !isError && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -79,6 +79,43 @@ const QuestionList = () => {
           >
             Select your experience level, paste a job description, and click "Generate Questions" to
             see tailored interview questions appear here.
+          </motion.p>
+        </motion.div>
+      )}
+
+      {/* Error State */}
+      {isError && !isLoading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="flex h-[300px] flex-col items-center justify-center py-12 text-center"
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="relative mb-6"
+          >
+            <div className="gradient-background flex h-24 w-24 items-center justify-center rounded-full">
+              <CircleSlash className="gradient-foreground h-10 w-10" />
+            </div>
+          </motion.div>
+          <motion.h3
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mb-3 text-xl font-semibold text-slate-800"
+          >
+            Oops! Something went wrong
+          </motion.h3>
+          <motion.p
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mx-auto mb-6 max-w-md text-slate-500"
+          >
+            Please try again by resetting the form.
           </motion.p>
         </motion.div>
       )}

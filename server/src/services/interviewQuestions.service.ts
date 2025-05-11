@@ -7,7 +7,7 @@ import { INTERVIEW_QUESTIONS_PROMPT } from "./langchain/prompts";
 const parser = StructuredOutputParser.fromZodSchema(InterviewQuestionsResponseSchema);
 const outputFixingParser = OutputFixingParser.fromLLM(model, parser);
 
-// Create a chain that includes the format instructions
+// Chain to generate interview questions
 const interviewQuestionsChain = INTERVIEW_QUESTIONS_PROMPT.pipe(model).pipe(outputFixingParser);
 
 export const generateInterviewQuestions = async (params: GenerateQuestions) => {

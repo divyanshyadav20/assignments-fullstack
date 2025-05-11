@@ -9,6 +9,7 @@ export type QuestionsContextType = {
   questions: Question[];
   metadata: Metadata | null;
   isLoading: boolean;
+  isError: boolean;
   fetchQuestions: (payload: QuestionRequestForm) => Promise<void>;
   reset: () => void;
 };

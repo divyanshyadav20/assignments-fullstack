@@ -104,6 +104,7 @@ const InterviewQuestionForm = () => {
               variant="outline"
               className="w-full rounded-lg border-slate-200 bg-white py-6 text-gray-700 hover:bg-slate-50"
               onClick={handleReset}
+              disabled={isLoading}
             >
               Reset Form
             </Button>
