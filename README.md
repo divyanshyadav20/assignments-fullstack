@@ -1,4 +1,4 @@
-# Recruitely Assignment - Technical Interview Questions Generator
+# Recruitly Assignment - Technical Interview Questions Generator
 
 A full-stack application that generates tailored technical interview questions based on job requirements and experience levels.
 
