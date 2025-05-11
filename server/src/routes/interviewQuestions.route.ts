@@ -12,16 +12,11 @@ router.post("/generate", async (req: Request, res: Response) => {
     const validatedData = GenerateQuestionsSchema.parse(req.body);
 
     // Generate questions using LangChain
-    const questions = await generateInterviewQuestions({
-      role: validatedData.role,
-      experienceLevel: validatedData.experienceLevel,
-      numberOfQuestions: validatedData.numberOfQuestions,
-      topics: validatedData.topics,
-    });
+    const questions = await generateInterviewQuestions(validatedData);
 
     res.status(200).json({
       success: true,
-      data: questions,
+      questions,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
