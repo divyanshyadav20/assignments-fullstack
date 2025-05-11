@@ -13,6 +13,13 @@ export const useFetchQuestions = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  function reset() {
+    setQuestions([]);
+    setMetadata(null);
+    setIsError(false);
+    setIsLoading(false);
+  }
+
   async function fetchQuestions(payload: QuestionRequestForm) {
     setIsLoading(true);
     try {
@@ -26,5 +33,5 @@ export const useFetchQuestions = () => {
     }
   }
 
-  return { questions, metadata, isLoading, isError, fetchQuestions };
+  return { questions, metadata, isLoading, isError, fetchQuestions, reset };
 };

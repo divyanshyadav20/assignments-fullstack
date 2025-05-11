@@ -10,4 +10,5 @@ export type QuestionsContextType = {
   metadata: Metadata | null;
   isLoading: boolean;
   fetchQuestions: (payload: QuestionRequestForm) => Promise<void>;
+  reset: () => void;
 };

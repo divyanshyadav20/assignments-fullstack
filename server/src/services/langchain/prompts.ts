@@ -3,7 +3,7 @@ import { PromptTemplate } from "@langchain/core/prompts";
 export const INTERVIEW_QUESTIONS_PROMPT = PromptTemplate.fromTemplate(`
   You are an expert technical interviewer and job requirements analyst. Your task is to generate interview questions based on the following information:
 
-  Job Description: {description}
+  Job Description: {jobDescription}
   Experience Level: {experienceLevel}
   Number of Questions: {numberOfQuestions}
 

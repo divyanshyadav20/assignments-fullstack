@@ -12,11 +12,11 @@ const interviewQuestionsChain = INTERVIEW_QUESTIONS_PROMPT.pipe(model).pipe(outp
 
 export const generateInterviewQuestions = async (params: GenerateQuestions) => {
   try {
-    const { description, experienceLevel, numberOfQuestions } = params;
+    const { jobDescription, experienceLevel } = params;
     return await interviewQuestionsChain.invoke({
-      description,
+      jobDescription,
       experienceLevel,
-      numberOfQuestions,
+      numberOfQuestions: 5,
     });
   } catch (error) {
     console.error("Error generating interview questions:", error);

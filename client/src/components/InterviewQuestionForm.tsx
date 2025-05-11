@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Textarea } from "./ui/textarea";
 
 const InterviewQuestionForm = () => {
-  const { fetchQuestions, isLoading } = useQuestionsContext();
+  const { fetchQuestions, isLoading, reset } = useQuestionsContext();
 
   const form = useForm<QuestionRequestForm>({
     resolver: zodResolver(questionRequestFormSchema),
@@ -27,6 +27,7 @@ const InterviewQuestionForm = () => {
 
   function handleReset() {
     form.reset();
+    reset();
   }
 
   return (

@@ -36,12 +36,8 @@ export const InterviewQuestionsResponseSchema = z.object({
 });
 
 export const GenerateQuestionsSchema = z.object({
-  description: z.string().describe("The job description"),
-  experienceLevel: z.enum(["junior", "mid", "senior"]).describe("The experience level of the job"),
-  numberOfQuestions: z
-    .number()
-    .min(1)
-    .max(10)
-    .default(5)
-    .describe("The number of questions to generate"),
+  jobDescription: z.string().describe("The job description"),
+  experienceLevel: z
+    .enum(["junior", "mid-level", "senior"])
+    .describe("The experience level of the job"),
 });
